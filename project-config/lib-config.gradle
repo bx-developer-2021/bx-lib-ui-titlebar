@@ -5,7 +5,7 @@ ext {
     isLocalReop = true
 
     libModelConfigs = [
-            "lib-ui-widget"            : [
+            "lib-ui-titlebar"            : [
                     libName       : "lib-ui-titlebar",
                     libVersionName: "1.0.1",
                     libType       : "aar"

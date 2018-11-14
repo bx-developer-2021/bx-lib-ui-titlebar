@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.support.annotation.RestrictTo
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -13,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.widget.RelativeLayout.*
-import co.bxvip.android.commonlib.widget.R
+import co.bxvip.android.commonlib.title.R
 import co.bxvip.tools.DisplayUtils.getStatusBarHeight
 import co.bxvip.wedgit.StatusBarView
 import co.bxvip.wedgit.drawable.TitleArrowDrawable
