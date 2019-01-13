@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import android.widget.*
 import android.widget.RelativeLayout.*
 import co.bxvip.android.commonlib.title.R
+import co.bxvip.android.commonlib.utils.Preference
 import co.bxvip.tools.DisplayUtils.getStatusBarHeight
+import co.bxvip.tools.setGlideBgDrawble
 import co.bxvip.wedgit.StatusBarView
 import co.bxvip.wedgit.drawable.TitleArrowDrawable
 import com.qihoo360.replugin.RePlugin
@@ -158,29 +160,32 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     private val statuBar by lazy {
         StatusBarView(context).apply {
-
-            var drawable = fetchRes(this, "co.bxvip.android.plugin.skin", "drawable", "home_head_1")
-            if (drawable != null) {
-                setBackgroundDrawable(drawable)
-            } else {
-                try {
-                    drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "drawable", context.packageName))
-                } catch (e: Resources.NotFoundException) {
-//                e.printStackTrace()
-                }
-                if (drawable == null)
-                    try {
-                        drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "mipmap", context.packageName))
-                    } catch (e: Resources.NotFoundException) {
-//                    e.printStackTrace()
-                    }
+            setGlideBgDrawble(context, Preference.spGetString("title-home_head_1", ""), {
+                setBackgroundDrawable(it)
+            }, {
+                var drawable = fetchRes( "co.bxvip.android.plugin.skin", "drawable", "home_head_1")
                 if (drawable != null) {
                     setBackgroundDrawable(drawable)
-
                 } else {
-                    setBackgroundColor(Color.parseColor("#f96716"))
+                    try {
+                        drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "drawable", context.packageName))
+                    } catch (e: Resources.NotFoundException) {
+//                e.printStackTrace()
+                    }
+                    if (drawable == null)
+                        try {
+                            drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "mipmap", context.packageName))
+                        } catch (e: Resources.NotFoundException) {
+//                    e.printStackTrace()
+                        }
+                    if (drawable != null) {
+                        setBackgroundDrawable(drawable)
+
+                    } else {
+                        setBackgroundColor(Color.parseColor("#f96716"))
+                    }
                 }
-            }
+            })
         }
     }
 
@@ -246,32 +251,37 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         val paramLayout = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(titleBarHeight) + getStatusBarHeight(context, 0))
         this.addView(RootLayout, paramLayout)
 
-        var drawable = fetchRes(relativeLayout, "co.bxvip.android.plugin.skin", "drawable", "home_head")
-        if (drawable != null) {
-            relativeLayout.setBackgroundDrawable(drawable)
-            return
-        } else {
-            try {
-                drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head", "drawable", context.packageName))
-            } catch (e: Resources.NotFoundException) {
-//                e.printStackTrace()
-            }
-            if (drawable == null)
-                try {
-                    drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head", "mipmap", context.packageName))
-                } catch (e: Resources.NotFoundException) {
-//                    e.printStackTrace()
-                }
+        setGlideBgDrawble(context, Preference.spGetString("title-home_head_1", ""), {
+            relativeLayout.setBackgroundDrawable(it)
+        }, {
+            var drawable = fetchRes("co.bxvip.android.plugin.skin", "drawable", "home_head")
+            var b = false
             if (drawable != null) {
                 relativeLayout.setBackgroundDrawable(drawable)
-                return
+                b = true
+            } else {
+                try {
+                    drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head", "drawable", context.packageName))
+                } catch (e: Resources.NotFoundException) {
+//                e.printStackTrace()
+                }
+                if (drawable == null)
+                    try {
+                        drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head", "mipmap", context.packageName))
+                    } catch (e: Resources.NotFoundException) {
+//                    e.printStackTrace()
+                    }
+                if (drawable != null) {
+                    relativeLayout.setBackgroundDrawable(drawable)
+                    b = true
+                }
             }
-
-        }
-        relativeLayout.setBackgroundColor(Color.parseColor("#fd7c34"))
+            if (!b)
+                relativeLayout.setBackgroundColor(Color.parseColor("#fd7c34"))
+        })
     }
 
-    private fun fetchRes(view: View, pluginName: String, defType: String, name: String): Drawable? {
+    private fun fetchRes(pluginName: String, defType: String, name: String): Drawable? {
         //获取插件中的图片资源
         try {
             val fetchResources = RePlugin.fetchResources(pluginName)
@@ -292,7 +302,6 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         } catch (e: Exception) {
 //            e.printStackTrace()
         }
-
         return null
     }
 
@@ -541,7 +550,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         return titleTextView.text.toString()
     }
 
-    fun getTitleTextView():TextView{
+    fun getTitleTextView(): TextView {
         return titleTextView
     }
 
@@ -577,7 +586,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         return rightTextView.tag as T
     }
 
-    fun getRightTextview():TextView{
+    fun getRightTextview(): TextView {
         return rightTextView
     }
 
