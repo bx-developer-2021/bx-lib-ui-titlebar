@@ -251,7 +251,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         val paramLayout = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(titleBarHeight) + getStatusBarHeight(context, 0))
         this.addView(RootLayout, paramLayout)
 
-        setGlideBgDrawble(context, Preference.spGetString("title-home_head_1", ""), {
+        setGlideBgDrawble(context, Preference.spGetString("title-home_head", ""), {
             relativeLayout.setBackgroundDrawable(it)
         }, {
             var drawable = fetchRes("co.bxvip.android.plugin.skin", "drawable", "home_head")
