@@ -7,7 +7,7 @@ ext {
     libModelConfigs = [
             "lib-ui-titlebar"            : [
                     libName       : "lib-ui-titlebar",
-                    libVersionName: "1.0.1",
+                    libVersionName: "1.0.2",
                     libType       : "aar"
             ]
     ]

@@ -160,33 +160,37 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     private val statuBar by lazy {
         StatusBarView(context).apply {
-            setGlideBgDrawble(context, Preference.spGetString("title-home_head_1", ""), {
-                setBackgroundDrawable(it)
-            }, {
-                var drawable = fetchRes( "co.bxvip.android.plugin.skin", "drawable", "home_head_1")
+            setBarRes()
+        }
+    }
+
+    private fun StatusBarView.setBarRes() {
+        setGlideBgDrawble(context, Preference.spGetString("title-home_head_1", ""), {
+            setBackgroundDrawable(it)
+        }, {
+            var drawable = fetchRes("co.bxvip.android.plugin.skin", "drawable", "home_head_1")
+            if (drawable != null) {
+                setBackgroundDrawable(drawable)
+            } else {
+                try {
+                    drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "drawable", context.packageName))
+                } catch (e: Resources.NotFoundException) {
+//                e.printStackTrace()
+                }
+                if (drawable == null)
+                    try {
+                        drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "mipmap", context.packageName))
+                    } catch (e: Resources.NotFoundException) {
+//                    e.printStackTrace()
+                    }
                 if (drawable != null) {
                     setBackgroundDrawable(drawable)
-                } else {
-                    try {
-                        drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "drawable", context.packageName))
-                    } catch (e: Resources.NotFoundException) {
-//                e.printStackTrace()
-                    }
-                    if (drawable == null)
-                        try {
-                            drawable = context.resources.getDrawable(context.resources.getIdentifier("home_head_1", "mipmap", context.packageName))
-                        } catch (e: Resources.NotFoundException) {
-//                    e.printStackTrace()
-                        }
-                    if (drawable != null) {
-                        setBackgroundDrawable(drawable)
 
-                    } else {
-                        setBackgroundColor(Color.parseColor("#f96716"))
-                    }
+                } else {
+                    setBackgroundColor(Color.parseColor("#f96716"))
                 }
-            })
-        }
+            }
+        })
     }
 
     private val titleBarCenterView by lazy {
@@ -250,14 +254,17 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         RootLayout.addView(relativeLayout)
         val paramLayout = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(titleBarHeight) + getStatusBarHeight(context, 0))
         this.addView(RootLayout, paramLayout)
+        relativeLayout.setRes()
+    }
 
+    private fun View.setRes() {
         setGlideBgDrawble(context, Preference.spGetString("title-home_head", ""), {
-            relativeLayout.setBackgroundDrawable(it)
+            setBackgroundDrawable(it)
         }, {
             var drawable = fetchRes("co.bxvip.android.plugin.skin", "drawable", "home_head")
             var b = false
             if (drawable != null) {
-                relativeLayout.setBackgroundDrawable(drawable)
+                setBackgroundDrawable(drawable)
                 b = true
             } else {
                 try {
@@ -272,12 +279,12 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 //                    e.printStackTrace()
                     }
                 if (drawable != null) {
-                    relativeLayout.setBackgroundDrawable(drawable)
+                    setBackgroundDrawable(drawable)
                     b = true
                 }
             }
             if (!b)
-                relativeLayout.setBackgroundColor(Color.parseColor("#fd7c34"))
+                setBackgroundColor(Color.parseColor("#fd7c34"))
         })
     }
 
@@ -610,6 +617,11 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
      */
     fun getLeftImg(): ImageView {
         return leftImgView
+    }
+
+    fun onRefresh() {
+        statuBar.setBarRes()
+        relativeLayout.setRes()
     }
 }
 
