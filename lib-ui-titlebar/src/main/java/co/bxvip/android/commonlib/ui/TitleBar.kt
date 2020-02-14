@@ -568,6 +568,10 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     fun <T> getLeftTextTag(): T {
         return leftTextView.tag as T
     }
+    
+    fun getLeftTextview(): TextView {
+        return leftTextView
+    }
 
     fun setLeftImgTag(tag: Any?) {
         leftImgView.tag = tag
