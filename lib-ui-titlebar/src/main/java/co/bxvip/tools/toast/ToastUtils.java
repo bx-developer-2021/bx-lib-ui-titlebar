@@ -104,22 +104,22 @@ public final class ToastUtils {
         show(object != null ? object.toString() : "null");
     }
 
-//    /**
-//     * 显示一个吐司
-//     *
-//     * @param id 如果传入的是正确的string id就显示对应字符串
-//     *           如果不是则显示一个整数的string
-//     */
-//    public static void show(int id) {
-//        checkToastState();
-//        try {
-//            // 如果这是一个资源 id
-//            show(sToast.getView().getContext().getResources().getText(id));
-//        } catch (Resources.NotFoundException ignored) {
-//            // 如果这是一个 int 数据
-//            show(String.valueOf(id));
-//        }
-//    }
+    /**
+     * 显示一个吐司
+     *
+     * @param id 如果传入的是正确的string id就显示对应字符串
+     *           如果不是则显示一个整数的string
+     */
+    public static void show(int id) {
+        checkToastState();
+        try {
+            // 如果这是一个资源 id
+            show(sToast.getView().getContext().getResources().getText(id));
+        } catch (Resources.NotFoundException ignored) {
+            // 如果这是一个 int 数据
+            show(String.valueOf(id));
+        }
+    }
 
     /**
      * 显示一个吐司
