@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -51,15 +52,19 @@ public final class ToastUtils {
 //     */
 //    public static void init(Application application, IToastStyle style) {
 //        initStyle(style);
-//        init(CommonInit.ctx);
+//        init(application);
 //    }
 
     /**
      * 初始化 ToastUtils，在Application中初始化
      */
-    public static void init() {
+    public static void init(@Nullable Application application) {
         isInit = true;
-        Application application = CommonInit.ctx;
+
+        if (application == null){
+            application = CommonInit.ctx;
+        }
+
         checkNullPointer(application);
         // 初始化 Toast 拦截器
         if (sInterceptor == null) {
@@ -260,11 +265,11 @@ public final class ToastUtils {
     }
 
     /**
-     * 检查吐司状态，如果未初始化请先调用{@link ToastUtils#init()}
+     * 检查吐司状态，如果未初始化请先调用{@link ToastUtils#init(Application application)}
      */
     private static void checkToastState() {
         if (!isInit) {
-            init();
+            init(null);
         }
         // 吐司工具类还没有被初始化，必须要先调用init方法进行初始化
         if (sToast == null) {
