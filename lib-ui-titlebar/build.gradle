@@ -1,15 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-apply plugin: 'com.github.dcendents.android-maven'
-
-def modelName = getName()
-
-def modelConfig = libModelConfigs[modelName]
-
-group = GROUP
-version = modelConfig['libVersionName']
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -17,8 +8,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName modelConfig["libVersionName"]
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -36,10 +25,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    compileOnly 'com.github.bxvip2020:android-support:26.0.2.11.8'
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compileOnly androidSupport
+    compileOnly "com.qihoo360.replugin:replugin-plugin-lib:$replugin_version"
     compileOnly glide
-    compileOnly repluginplugin
 }
 
 task androidJavadocs(type: Javadoc) {
