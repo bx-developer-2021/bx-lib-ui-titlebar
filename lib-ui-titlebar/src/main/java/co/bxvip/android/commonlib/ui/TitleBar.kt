@@ -15,7 +15,7 @@ import android.widget.RelativeLayout.*
 import co.bxvip.android.commonlib.title.R
 import co.bxvip.android.commonlib.utils.Preference
 import co.bxvip.tools.DisplayUtils.getStatusBarHeight
-import co.bxvip.tools.setGlideBgDrawble
+import co.bxvip.tools.setGlideBgDrawable
 import co.bxvip.wedgit.StatusBarView
 import co.bxvip.wedgit.drawable.TitleArrowDrawable
 import com.qihoo360.replugin.RePlugin
@@ -166,7 +166,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     }
 
     private fun StatusBarView.setBarRes() {
-        setGlideBgDrawble(context, Preference.spGetString("title-home_head_1", ""), {
+        setGlideBgDrawable(context, Preference.spGetString("title-home_head_1", ""), {
             setBackgroundDrawable(it)
         }, {
             var drawable = fetchRes("co.bxvip.android.plugin.skin", "drawable", "home_head_1")
@@ -258,7 +258,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     }
 
     private fun View.setRes() {
-        setGlideBgDrawble(context, Preference.spGetString("title-home_head", ""), {
+        setGlideBgDrawable(context, Preference.spGetString("title-home_head", ""), {
             setBackgroundDrawable(it)
         }, {
             var drawable = fetchRes("co.bxvip.android.plugin.skin", "drawable", "home_head")
