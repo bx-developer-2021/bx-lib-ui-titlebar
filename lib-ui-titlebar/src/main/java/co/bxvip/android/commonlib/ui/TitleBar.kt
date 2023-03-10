@@ -50,7 +50,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     private var titleScrllo = false
     private var titleBarLayoutId = -1
 
-    private var titleBarHeight = 46f
+    private var titleBarHeight = 48f
     /* -------------初始化UI----------------- */
 
     private val leftImgView by lazy {
