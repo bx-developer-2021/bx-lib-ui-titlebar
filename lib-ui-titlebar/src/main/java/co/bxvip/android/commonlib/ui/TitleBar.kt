@@ -29,6 +29,7 @@ import com.qihoo360.replugin.RePlugin
  * </pre>
  */
 
+@Suppress("unused")
 class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
     private var leftTextVisible = View.VISIBLE
     private var leftText: CharSequence = ""
@@ -142,7 +143,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         }
     }
 
-    private val RootLayout by lazy {
+    private val rootLayout by lazy {
         LinearLayout(context).apply {
             layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             orientation = LinearLayout.VERTICAL
@@ -158,7 +159,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     // 状态栏背景
 
-    private val statuBar by lazy {
+    private val statusBar by lazy {
         StatusBarView(context).apply {
             setBarRes()
         }
@@ -238,10 +239,10 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         titleBarLayoutId = array.getResourceId(R.styleable.TitleBar_titleBarLayoutId, -1)
 
         array.recycle()
-        InitUI()
+        initialUI()
     }
 
-    private fun InitUI() {
+    private fun initialUI() {
         /* --------组合在一起---------- */
 
         relativeLayout.addView(leftImgView)
@@ -250,10 +251,10 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         relativeLayout.addView(rightTextView)
         relativeLayout.addView(rightImgView)
         relativeLayout.addView(titleBarCenterView)
-        RootLayout.addView(statuBar)
-        RootLayout.addView(relativeLayout)
+        rootLayout.addView(statusBar)
+        rootLayout.addView(relativeLayout)
         val paramLayout = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(titleBarHeight) + getStatusBarHeight(context, 0))
-        this.addView(RootLayout, paramLayout)
+        this.addView(rootLayout, paramLayout)
         relativeLayout.setRes()
     }
 
@@ -610,21 +611,21 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     }
 
     /**
-     * leo:2018-04-08 todo 获取右侧图片ImageView
+     * 获取右侧图片ImageView
      */
     fun getRightImg(): ImageView {
         return rightImgView
     }
 
     /**
-     * leo:2018-04-08 todo 获取右侧图片ImageView
+     * 获取左侧图片ImageView
      */
     fun getLeftImg(): ImageView {
         return leftImgView
     }
 
     fun onRefresh() {
-        statuBar.setBarRes()
+        statusBar.setBarRes()
         relativeLayout.setRes()
     }
 }
