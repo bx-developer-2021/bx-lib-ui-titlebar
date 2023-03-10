@@ -84,6 +84,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             visibility = leftTextVisible
         }
     }
+
     // 标题
     private val titleTextView by lazy {
         TitleTextView(context).apply {
@@ -150,7 +151,6 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         }
     }
 
-
     private val relativeLayout by lazy {
         RelativeLayout(context).apply {
             layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -186,7 +186,6 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
                     }
                 if (drawable != null) {
                     setBackgroundDrawable(drawable)
-
                 } else {
                     setBackgroundColor(Color.parseColor("#f96716"))
                 }
@@ -434,7 +433,6 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         this.rightTextView.setCompoundDrawablesWithIntrinsicBounds(lRes, 0, rRes, 0)
     }
 
-
     /**
      * 默认单位SP
 
@@ -569,7 +567,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     fun <T> getLeftTextTag(): T {
         return leftTextView.tag as T
     }
-    
+
     fun getLeftTextview(): TextView {
         return leftTextView
     }
