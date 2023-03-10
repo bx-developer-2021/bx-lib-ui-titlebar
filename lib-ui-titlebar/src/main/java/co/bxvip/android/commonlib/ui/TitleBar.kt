@@ -314,7 +314,7 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         // 父容器传过来的宽度的值
-        val viewWidth = View.MeasureSpec.getSize(widthMeasureSpec) - paddingLeft - paddingRight
+        val viewWidth = MeasureSpec.getSize(widthMeasureSpec) - paddingLeft - paddingRight
 
         if (titleScrllo) {
             val layoutParams = titleTextView.layoutParams
@@ -512,23 +512,23 @@ class TitleBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     /************************************other end*********************************************/
 
     /************************************event start*********************************************/
-    fun setOnLeftImageClick(listener: View.OnClickListener) {
+    fun setOnLeftImageClick(listener: OnClickListener) {
         leftImgView.setOnClickListener(listener)
     }
 
-    fun setOnLeftTextClick(listener: View.OnClickListener) {
+    fun setOnLeftTextClick(listener: OnClickListener) {
         leftTextView.setOnClickListener(listener)
     }
 
-    fun setOnTitleClick(listener: View.OnClickListener) {
+    fun setOnTitleClick(listener: OnClickListener) {
         titleTextView.setOnClickListener(listener)
     }
 
-    fun setOnRightTextClick(listener: View.OnClickListener) {
+    fun setOnRightTextClick(listener: OnClickListener) {
         rightTextView.setOnClickListener(listener)
     }
 
-    fun setOnRightImageClick(listener: View.OnClickListener) {
+    fun setOnRightImageClick(listener: OnClickListener) {
         rightImgView.setOnClickListener(listener)
     }
 
